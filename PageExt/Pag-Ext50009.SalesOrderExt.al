@@ -36,6 +36,10 @@ pageextension 50009 "Sales OrderExt" extends "Sales Order"
     }
     actions
     {
+        modify(Post)
+        {
+            Visible = false;
+        }
         addlast(processing)
         {
             action("Export Proforma")

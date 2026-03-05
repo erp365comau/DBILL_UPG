@@ -1,7 +1,18 @@
-/* pageextension 50035 "Item Ledger EntryExt" extends "Item Ledger Entries"
+pageextension 50035 "Item Ledger EntryExt" extends "Item Ledger Entries"
 {
+    layout
+    {
+        addbefore("Entry Type")
+        {
+            field("Product Group Code"; Rec."Product Group Code")
+            {
+                Caption = 'Product Group Code';
+                ApplicationArea = All;
+            }
 
-    actions
+        }
+    }
+    /* actions
     {
         addlast(Processing)
         {
@@ -18,7 +29,6 @@
                 end;
             }
         }
-    }
+    } */
 }
 
- */

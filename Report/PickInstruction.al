@@ -113,6 +113,9 @@ report 50034 "Pick Instruction Report"
                     column(QtyToAsm; QtyToAsm)
                     {
                     }
+                    column(NetWeight_SalesLine; NetWeight)
+                    {
+                    }
                     dataitem(ItemTrackingLines; Integer)
                     {
                         DataItemTableView = SORTING(Number);
@@ -222,6 +225,8 @@ report 50034 "Pick Instruction Report"
                         //     SalesLineReserve.InitTrackingSpecification(SalesLine, TempItemTracking); ERP
                         SetSource(TempItemTracking, SalesLine."Shipment Date");
                         //Austral Sugeevan 01/07/2014 --> End
+
+                        NetWeight := "Sales Line".Quantity * "Sales Line"."Net Weight";
                     end;
                 }
 
@@ -321,6 +326,7 @@ report 50034 "Pick Instruction Report"
         TempItemTracking2: Record "Tracking Specification" temporary;
         ShipToAddr: array[8] of Text[50];
         CustAddr: array[8] of Text[50];
+        NetWeight: Decimal;
 
     procedure GetUOM(UOMCode: Code[10]): Text
     var

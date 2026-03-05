@@ -1,4 +1,4 @@
-pageextension 50033 PostedSalesCreditMemoSubExt extends "Posted Sales Cr. Memo Subform"
+pageextension 50037 PostedSalesInvoiceSubformExt extends "Posted Sales Invoice Subform"
 {
     layout
     {

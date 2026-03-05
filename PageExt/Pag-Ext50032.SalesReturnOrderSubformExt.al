@@ -8,6 +8,10 @@ pageextension 50032 SalesReturnOrderSubformExt extends "Sales Return Order Subfo
             {
                 ApplicationArea = all;
             }
+            field("VMS Label Description"; Rec."VMS Label Description")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

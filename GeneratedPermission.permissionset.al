@@ -87,13 +87,11 @@ permissionset 50000 GeneratedPermission
         codeunit "GL Entry EventSubs" = X,
         codeunit "Item Card EventSub" = X,
         codeunit "Item EventSub" = X,
-        codeunit "Item Journal Line EventSub" = X,
         codeunit "Item Ledger Entry Eventsub" = X,
         codeunit "Production Journal Mgt EventSu" = X,
         codeunit "Production Order EventSub" = X,
         codeunit "Production Order Line Eventsub" = X,
         codeunit "Purch.-Post EventSub" = X,
-        codeunit "Purchase Header EventSub" = X,
         codeunit "Sales Line EventSub" = X,
         codeunit "Sales Post EventSub" = X,
         codeunit "Sales Price Calc. Mgt. EventSu" = X,
@@ -108,8 +106,9 @@ permissionset 50000 GeneratedPermission
         tabledata "Product Group Code" = RIMD,
         table "Product Group Code" = X,
         report "Item Age Composition Value V2" = X,
-        report "Purchase Header Reopen" = X,
-        //codeunit "Item Description Modify" = X,
         codeunit "Sales Order Excel Import" = X,
-        page "Product Group Code" = X;
+        page "Product Group Code" = X,
+        report "GST Purchase Report v2" = X,
+        report "GST Purchase Report v3" = X,
+        page "Product Group Code Card" = X;
 }

@@ -32,9 +32,9 @@
             </Paragraphs>
             <Top>0.423cm</Top>
             <Height>0.423cm</Height>
-            <Width>18.15cm</Width>
+            <Width>28.49521cm</Width>
             <Visibility>
-              <Hidden>=IIF(First(Fields!ItemLedgEntryFilter.Value) = "" AND First(Fields!PrintToExcel.Value, "DataSet_Result") = TRUE,TRUE,FALSE)</Hidden>
+              <Hidden>=IIF(First(Fields!ItemLedgEntryFilter.Value) = "",TRUE,FALSE)</Hidden>
             </Visibility>
             <DataElementOutput>NoOutput</DataElementOutput>
             <Style>
@@ -60,10 +60,10 @@
               </Paragraph>
             </Paragraphs>
             <Height>0.423cm</Height>
-            <Width>18.15cm</Width>
+            <Width>28.49521cm</Width>
             <ZIndex>1</ZIndex>
             <Visibility>
-              <Hidden>=IIF(First(Fields!CustFilter.Value) = "" AND First(Fields!PrintToExcel.Value, "DataSet_Result") = TRUE,TRUE,FALSE)</Hidden>
+              <Hidden>=IIF(First(Fields!CustFilter.Value) = "",TRUE,FALSE)</Hidden>
             </Visibility>
             <DataElementOutput>NoOutput</DataElementOutput>
             <Style>
@@ -77,37 +77,40 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.60738cm</Width>
+                  <Width>2.17863cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.80262cm</Width>
+                  <Width>4.60116cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.13438cm</Width>
+                  <Width>1.99667cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>9.87603cm</Width>
+                  <Width>4.34624cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.54021cm</Width>
+                  <Width>1.87875cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.65875cm</Width>
+                  <Width>1.94438cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.85208cm</Width>
+                  <Width>2.05833cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.39416cm</Width>
+                  <Width>1.7327cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.57938cm</Width>
+                  <Width>1.59418cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.6323cm</Width>
+                  <Width>1.78563cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.53187cm</Width>
+                  <Width>2.0502cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.32833cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -466,6 +469,39 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox102</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Product Group Code</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -838,12 +874,45 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Item_Prod_Group_Code">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Item_Prod_Group_Code.Value</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Item_Prod_Group_Code</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -871,11 +940,8 @@
             <Top>1.2937cm</Top>
             <Left>0cm</Left>
             <Height>1.2cm</Height>
-            <Width>43.60917cm</Width>
+            <Width>28.4952cm</Width>
             <ZIndex>2</ZIndex>
-            <Visibility>
-              <Hidden>=Fields!PrintToExcel.Value=false</Hidden>
-            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -883,13 +949,13 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.73183cm</Height>
+        <Height>3.41975cm</Height>
         <Style />
       </Body>
-      <Width>43.60917cm</Width>
+      <Width>28.49521cm</Width>
       <Page>
         <PageHeader>
-          <Height>1.11083cm</Height>
+          <Height>3.14621cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -911,7 +977,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Left>15cm</Left>
+              <Top>0.09347in</Top>
+              <Left>25.34521cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <Style>
@@ -935,8 +1002,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.423cm</Top>
-              <Left>15cm</Left>
+              <Top>0.66042cm</Top>
+              <Left>25.34521cm</Left>
               <Height>0.423cm</Height>
               <Width>3.15cm</Width>
               <ZIndex>1</ZIndex>
@@ -944,17 +1011,109 @@
                 <VerticalAlign>Middle</VerticalAlign>
               </Style>
             </Textbox>
+            <Textbox Name="All_amounts_are_in_LCYCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!All_amounts_are_in_LCYCaption.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.692cm</Top>
+              <Height>0.423cm</Height>
+              <Width>7.5cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Customer_Item_SalesCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Customer_Item_SalesCaption.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Height>0.423cm</Height>
+              <Width>7.5cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="COMPANYNAME1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!COMPANYNAME.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.846cm</Top>
+              <Height>0.423cm</Height>
+              <Width>7.5cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="STRSUBSTNO_Text000_PeriodText_1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!STRSUBSTNO_Text000_PeriodText_.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.423cm</Top>
+              <Height>0.423cm</Height>
+              <Width>7.5cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style />
         </PageHeader>
-        <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
+        <PageHeight>21cm</PageHeight>
+        <PageWidth>29.7cm</PageWidth>
         <InteractiveHeight>11in</InteractiveHeight>
         <InteractiveWidth>8.5in</InteractiveWidth>
         <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0cm</RightMargin>
-        <TopMargin>2cm</TopMargin>
-        <BottomMargin>2cm</BottomMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -1074,9 +1233,6 @@ End Function
         </Field>
         <Field Name="ProfitPctFormat">
           <DataField>ProfitPctFormat</DataField>
-        </Field>
-        <Field Name="PrintToExcel">
-          <DataField>PrintToExcel</DataField>
         </Field>
         <Field Name="Customer_Item_SalesCaption">
           <DataField>Customer_Item_SalesCaption</DataField>

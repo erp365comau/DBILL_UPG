@@ -67,9 +67,6 @@ report 50036 "Customer/Item Sale v3"
             {
                 DecimalPlaces = 1 : 1;
             }
-            column(PrintToExcel; PrintToExcel)
-            {
-            }
             column(Customer_Item_SalesCaption; Customer_Item_SalesCaptionLbl)
             {
             }
@@ -196,7 +193,7 @@ report 50036 "Customer/Item Sale v3"
                 column(Item_Category; Item."Item Category Code")
                 {
                 }
-                column(Item_Prod_Group_Code; Item."Item Category Code")
+                column(Item_Prod_Group_Code; Item."Product Group Code")
                 {
                 }
 
@@ -222,9 +219,8 @@ report 50036 "Customer/Item Sale v3"
                       ValueEntryBuffer."Cost Amount (Actual)" +
                       ValueEntryBuffer."Cost Amount (Non-Invtbl.)";
 
-                    IF PrintToExcel AND Item.GET(ValueEntryBuffer."Item No.") THEN BEGIN
+                    IF Item.GET(ValueEntryBuffer."Item No.") THEN BEGIN
                         CalcProfitPct;
-                        //MakeExcelDataBody;
                     END;
                 end;
 
@@ -274,11 +270,6 @@ report 50036 "Customer/Item Sale v3"
                         Caption = 'New Page per Customer';
                         ApplicationArea = all;
                     }
-                    field(PrintToExcel; PrintToExcel)
-                    {
-                        Caption = 'Print to Excel';
-                        ApplicationArea = all;
-                    }
                     field(AmountsInWhole; Rounding)
                     {
                         Caption = 'Amounts in whole';
@@ -292,30 +283,18 @@ report 50036 "Customer/Item Sale v3"
         {
         }
 
-        trigger OnOpenPage()
-        begin
-            PrintToExcel := FALSE;
-        end;
+
     }
 
     labels
     {
     }
 
-    /*  trigger OnPostReport()
-     begin
-         IF PrintToExcel THEN
-           CreateExcelbook;
-     end; */
-
     trigger OnPreReport()
     begin
         CustFilter := Customer.GETFILTERS;
         ItemLedgEntryFilter := "Item Ledger Entry".GETFILTERS;
         PeriodText := "Item Ledger Entry".GETFILTER("Posting Date");
-
-        /*    IF PrintToExcel THEN
-             MakeExcelInfo; */
     end;
 
     var
@@ -323,7 +302,6 @@ report 50036 "Customer/Item Sale v3"
         Item: Record Item;
         ValueEntry: Record "Value Entry";
         ValueEntryBuffer: Record "Value Entry" temporary;
-        ExcelBuf: Record "Excel Buffer" temporary;
         ReportMgmnt: Codeunit ReportManagement;
         Rounding: Option " ",Tens,Hundreds,Thousands,"Hundred Thousands",Millions;
         RoundingText: Text[50];
@@ -343,7 +321,6 @@ report 50036 "Customer/Item Sale v3"
         Text007: Label 'Date';
         Text008: Label 'Customer Filters';
         Text009: Label 'Value Entry Filters';
-        PrintToExcel: Boolean;
         Text010: Label 'Profit';
         Text011: Label 'Profit %';
         RoundingNO: Integer;
@@ -391,88 +368,5 @@ report 50036 "Customer/Item Sale v3"
 
         exit(DecimalText);
     end;
-
-
-    /* [Scope('Internal')]
-    procedure MakeExcelInfo()
-    begin
-        ExcelBuf.SetUseInfoSheet;
-        ExcelBuf.AddInfoColumn(FORMAT(Text003),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(COMPANYNAME,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text005),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(FORMAT(Text002),FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text004),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(REPORT::"Customer/Item Sales",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Number);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text006),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(USERID,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text007),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(TODAY,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Date);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text008),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn(Customer.GETFILTERS,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.NewRow;
-        ExcelBuf.AddInfoColumn(FORMAT(Text009),FALSE,'',TRUE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddInfoColumn("Item Ledger Entry".GETFILTERS,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.ClearNewRow;
-        MakeExcelDataHeader;
-    end;
-
-    local procedure MakeExcelDataHeader()
-    begin
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Customer.FIELDCAPTION("No."),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Customer.FIELDCAPTION(Name),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(ValueEntryBuffer.FIELDCAPTION("Item No."),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Item.FIELDCAPTION(Description),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(ValueEntryBuffer.FIELDCAPTION("Invoiced Quantity"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Item.FIELDCAPTION("Base Unit of Measure"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(
-          ValueEntryBuffer.FIELDCAPTION("Sales Amount (Actual)"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(ValueEntryBuffer.FIELDCAPTION("Discount Amount"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(FORMAT(Text010),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(FORMAT(Text011),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        //>> J5492
-        ExcelBuf.AddColumn(Item.FIELDCAPTION("Item Category Code"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Item.FIELDCAPTION("Product Group Code"),FALSE,'',TRUE,FALSE,TRUE,'',ExcelBuf."Cell Type"::Text);
-        //<< J5492
-    end;
-
-    [Scope('Internal')]
-    procedure MakeExcelDataBody()
-    begin
-        ExcelBuf.NewRow;
-        ExcelBuf.AddColumn(Customer."No.",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Customer.Name,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(ValueEntryBuffer."Item No.",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Item.Description,FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(-ValueEntryBuffer."Invoiced Quantity",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Number);
-        ExcelBuf.AddColumn(Item."Base Unit of Measure",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(ValueEntryBuffer."Sales Amount (Actual)",FALSE,'',FALSE,FALSE,FALSE,'#,##0.00',ExcelBuf."Cell Type"::Number);
-        ExcelBuf.AddColumn(-ValueEntryBuffer."Discount Amount",FALSE,'',FALSE,FALSE,FALSE,'#,##0.00',ExcelBuf."Cell Type"::Number);
-        ExcelBuf.AddColumn(Profit,FALSE,'',FALSE,FALSE,FALSE,'#,##0.00',ExcelBuf."Cell Type"::Number);
-        ExcelBuf.AddColumn(ProfitPct,FALSE,'',FALSE,FALSE,FALSE,'#,##0.00',ExcelBuf."Cell Type"::Number);
-        //>> J5492
-        ExcelBuf.AddColumn(Item."Item Category Code",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        ExcelBuf.AddColumn(Item."Product Group Code",FALSE,'',FALSE,FALSE,FALSE,'',ExcelBuf."Cell Type"::Text);
-        //<< J5492
-    end;
-
-    [Scope('Internal')]
-    procedure CreateExcelbook()
-    begin
-        ExcelBuf.CreateBookAndOpenExcel(Text001,Text002,COMPANYNAME,USERID);
-        ERROR('');
-    end;
-
-    [Scope('Internal')]
-    procedure InitializeRequest(NewPagePerCustomer: Boolean;PrintToExcelFile: Boolean)
-    begin
-        PrintOnlyOnePerPage := NewPagePerCustomer;
-        PrintToExcel := PrintToExcelFile;
-    end; */
 }
 

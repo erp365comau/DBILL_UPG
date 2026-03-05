@@ -360,6 +360,21 @@ codeunit 50013 "Sales Post EventSub"
         Number := Number + Number2;
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post and Send", OnBeforePostAndSend, '', false, false)]
+    local procedure "Sales-Post and Send_OnBeforePostAndSend"(var SalesHeader: Record "Sales Header"; var HideDialog: Boolean; var TempDocumentSendingProfile: Record "Document Sending Profile" temporary)
+    begin
+        if SalesHeader."Document Type" = SalesHeader."Document Type"::Order then
+            SalesHeader.TestField("Payment Method Code");
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post + Print", OnBeforeOnRun, '', false, false)]
+    local procedure "Sales-Post + Print_OnBeforeOnRun"(var SalesHeader: Record "Sales Header")
+    begin
+        if SalesHeader."Document Type" = SalesHeader."Document Type"::"Return Order" then
+            SalesHeader.TestField("Payment Method Code");
+    end;
+
+
     var
         SalesSetup: Record "Sales & Receivables Setup";
         TempPrepmtDeductLCYSalesLine: Record "Sales Line" temporary;
